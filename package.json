@@ -1,0 +1,66 @@
+const values = {
+  sales: 0,
+  expenses: 0.0,
+  pending: 0.0,
+  refunds: 0.0,
+  customers: 0,
+  payables: 0.0,
+  receivables: 0.0,
+  net: 0.0,
+  activeProducts: 0,
+  stockQty: 0,
+  stockValue: 0.0,
+  totalStaff: 0,
+  staffPayable: 0.0,
+  staffPaid: 0.0,
+};
+
+const formatMoney = (value) => `$${Number(value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+const updateCardValue = (selector, value, type = 'number') => {
+  const el = document.querySelector(selector);
+  if (!el) return;
+  el.textContent = type === 'money' ? formatMoney(value) : value;
+};
+
+const initialValues = {
+  '.stats-row .stat-card:nth-child(1) .value': { value: 0, type: 'number' },
+  '.stats-row .stat-card:nth-child(2) .value': { value: 0, type: 'money' },
+  '.stats-row .stat-card:nth-child(3) .value': { value: 0, type: 'money' },
+  '.stats-row .stat-card:nth-child(4) .value': { value: 0, type: 'money' },
+  '.one-third .value': { value: 0, type: 'number' },
+  '.panel-block:nth-of-type(1) .metric-box:nth-child(1) .metric-value': { value: 0, type: 'money' },
+  '.panel-block:nth-of-type(1) .metric-box:nth-child(2) .metric-value': { value: 0, type: 'money' },
+  '.panel-block:nth-of-type(1) .metric-box:nth-child(3) .metric-value': { value: 0, type: 'money' },
+  '.panel-block:nth-of-type(2) .metric-box:nth-child(1) .metric-value': { value: 0, type: 'number' },
+  '.panel-block:nth-of-type(2) .metric-box:nth-child(2) .metric-value': { value: 0, type: 'number' },
+  '.panel-block:nth-of-type(2) .metric-box:nth-child(3) .metric-value': { value: 0, type: 'money' },
+  '.panel-block:nth-of-type(3) .metric-box:nth-child(1) .metric-value': { value: 0, type: 'number' },
+  '.panel-block:nth-of-type(3) .metric-box:nth-child(2) .metric-value': { value: 0, type: 'money' },
+  '.panel-block:nth-of-type(3) .metric-box:nth-child(3) .metric-value': { value: 0, type: 'money' },
+};
+
+Object.entries(initialValues).forEach(([selector, config]) => {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.textContent = config.type === 'money' ? formatMoney(config.value) : config.value;
+  }
+});
+
+const pulse = document.querySelector('.brand-badge');
+if (pulse) {
+  pulse.animate(
+    [
+      { transform: 'scale(1)', boxShadow: '0 8px 20px rgba(244, 185, 56, 0.42)' },
+      { transform: 'scale(1.06)', boxShadow: '0 12px 24px rgba(244, 185, 56, 0.6)' },
+      { transform: 'scale(1)', boxShadow: '0 8px 20px rgba(244, 185, 56, 0.42)' },
+    ],
+    {
+      duration: 1400,
+      iterations: Infinity,
+      easing: 'ease-in-out',
+    }
+  );
+}
+
+console.log('NEXORA demo dashboard initialized.');
